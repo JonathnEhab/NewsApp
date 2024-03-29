@@ -13,7 +13,7 @@ class NewRepository @Inject constructor(
     private val newsDao: NewsDao
 ) {
     private val _newsData = MutableStateFlow<NewsModel?>(null)
-    val newsData: Flow<NewsModel?> = _newsData
+
 
     suspend fun getNews(query: String, apiKey: String): NewsModel {
         val response = apiService.getNews(query, apiKey)
