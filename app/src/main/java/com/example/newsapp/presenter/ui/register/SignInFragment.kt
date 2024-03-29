@@ -8,12 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentSignInBinding
 import com.example.newsapp.presenter.ui.home.HomeActivity
 import com.example.newsapp.presenter.ui.viewmodel.SignUpViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.cancel
 
 
 @AndroidEntryPoint
@@ -59,6 +61,7 @@ class SignInFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+
     }
 
 

@@ -16,6 +16,7 @@ import com.example.newsapp.databinding.FragmentSignInBinding
 import com.example.newsapp.presenter.ui.home.HomeActivity
 import com.example.newsapp.presenter.ui.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -56,22 +57,21 @@ class LoggInFragment : Fragment() {
             binding.passwordUser.requestFocus()
         } else {
             loginViewModel.login(email, password)
-            loginViewModel.loginResult.observe(viewLifecycleOwner) { result ->
-                when (result) {
-                    is LoginViewModel.LoginResult.Success -> {
-
-                        startActivity(Intent(requireContext(), HomeActivity::class.java))
-                        requireActivity().finish()
-                    }
-
-                    is LoginViewModel.LoginResult.InvalidCredentials -> {
-
-                        Toast.makeText(requireContext(), "Invalid Email Or Password", Toast.LENGTH_LONG).show()
-                    }
-
-                    else -> {
 
 
+            viewLifecycleOwner.lifecycleScope.launch {
+                loginViewModel.loginResult.collect { result ->
+                    when (result) {
+                        is LoginViewModel.LoginResult.Success -> {
+                            startActivity(Intent(requireContext(), HomeActivity::class.java))
+                            requireActivity().finish()
+                        }
+                        is LoginViewModel.LoginResult.InvalidCredentials -> {
+                            Toast.makeText(requireContext(), "Invalid Email Or Password", Toast.LENGTH_LONG).show()
+                        }
+                        else -> {
+
+                        }
                     }
                 }
             }
@@ -83,5 +83,6 @@ class LoggInFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+
     }
 }

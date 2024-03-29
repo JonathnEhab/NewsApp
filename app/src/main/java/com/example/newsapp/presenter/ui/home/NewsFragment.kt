@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +22,8 @@ import com.example.newsapp.presenter.adaper.SourceAdapter
 import com.example.newsapp.presenter.ui.viewmodel.NewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class NewsFragment : Fragment() {
@@ -62,22 +65,25 @@ class NewsFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = articlesAdapter
         }
+        viewModel.fetchArticleNews()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.articleNews.collect { newsModel ->
+                newsModel?.let {
+                    articlesAdapter.submitList(it.articles)
+                    sourceAdapter.submitList(it.articles)
 
-
-
-        viewModel.articleNews.observe(viewLifecycleOwner) { newsModel ->
-            newsModel?.let {
-                articlesAdapter.submitList(it.articles)
-                sourceAdapter.submitList(it.articles)
-                Log.d("TAG source", "onViewCreated: ${it.articles.size}")
-                Log.d("TAG article", "onViewCreated:" + it.articles.size)
+                }
             }
         }
-        viewModel.articleNews()
+
+
+
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
+
         _binding = null
     }
 
