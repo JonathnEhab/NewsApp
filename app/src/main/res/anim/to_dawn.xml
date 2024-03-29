@@ -1,0 +1,8 @@
+<!-- up_to_dawn_animation.xml -->
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate
+        android:fromYDelta="-100%p"
+        android:toYDelta="0%p"
+        android:duration="1000"
+        android:interpolator="@android:anim/linear_interpolator"/>
+</set>
