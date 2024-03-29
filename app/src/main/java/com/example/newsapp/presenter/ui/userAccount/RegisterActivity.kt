@@ -1,19 +1,11 @@
-package com.example.newsapp.presenter.ui.register
+package com.example.newsapp.presenter.ui.userAccount
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import com.example.newsapp.R
 import com.example.newsapp.databinding.ActivityRegisterBinding
-import com.example.newsapp.presenter.ui.home.HomeActivity
-import com.example.newsapp.presenter.ui.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {

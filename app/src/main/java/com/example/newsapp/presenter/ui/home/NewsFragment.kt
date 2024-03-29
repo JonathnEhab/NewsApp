@@ -42,6 +42,11 @@ class NewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+          binding.newsShimmer.startShimmer()
+        binding.sourceShimmer.startShimmer()
+        binding.userAccount.setOnClickListener {
+            findNavController().navigate(NewsFragmentDirections.actionNewsFragmentToUserAccountFragment())
+        }
 
         val sourceAdapter= SourceAdapter()
         val articlesAdapter = ArticleAdapter {title, urlToImage,publishedAt, description, suorce ,author  ->
@@ -71,14 +76,17 @@ class NewsFragment : Fragment() {
                 newsModel?.let {
                     articlesAdapter.submitList(it.articles)
                     sourceAdapter.submitList(it.articles)
+                    binding.newsShimmer.visibility=View.GONE
+                    binding.sourceShimmer.visibility=View.GONE
+                    binding.verticalNewsRecycler.visibility=View.VISIBLE
+                    binding.sourceRecycler.visibility=View.VISIBLE
+                    binding.newsShimmer.stopShimmer()
+                    binding.sourceShimmer.stopShimmer()
+
 
                 }
             }
         }
-
-
-
-
     }
 
     override fun onDestroy() {

@@ -2,19 +2,14 @@ package com.example.newsapp.presenter.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.view.animation.AlphaAnimation
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
-import com.daimajia.androidanimations.library.Techniques
-import com.daimajia.androidanimations.library.YoYo
-import com.example.newsapp.R
 import com.example.newsapp.databinding.ActivitySplashBinding
 import com.example.newsapp.presenter.ui.home.HomeActivity
-import com.example.newsapp.presenter.ui.register.RegisterActivity
+import com.example.newsapp.presenter.ui.userAccount.RegisterActivity
 import com.example.newsapp.presenter.ui.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay

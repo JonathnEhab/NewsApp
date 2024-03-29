@@ -15,10 +15,10 @@ import javax.inject.Inject
 class SignUpViewModel @Inject constructor(private val userRepository: UserRepository) :
     ViewModel() {
 
-    fun signUp(username: String, password: String) {
+    fun signUp(email: String, password: String) {
         viewModelScope.launch {
 
-            val user = User(username = username, password = password)
+            val user = User(email = email, password = password)
             userRepository.insert(user)
         }
     }

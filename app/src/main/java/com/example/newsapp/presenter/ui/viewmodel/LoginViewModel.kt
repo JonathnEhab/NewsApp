@@ -3,6 +3,7 @@ package com.example.newsapp.presenter.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.newsapp.domain.user.User
 import com.example.newsapp.presenter.ui.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,13 +14,32 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
 
+    private val _loginResult = MutableStateFlow<LoginResult?>(null)
+    val loginResult: StateFlow<LoginResult?> = _loginResult
+
+
+    private val _userStateFlow = MutableStateFlow<User?>(null)
+    val userStateFlow: StateFlow<User?> = _userStateFlow
+
+    fun getUser() {
+        viewModelScope.launch {
+            _userStateFlow.value = userRepository.getUser()
+        }
+    }
+
+    fun updateUserInfo(user: User) {
+        viewModelScope.launch {
+            userRepository.updateUserInfo(user)
+            _userStateFlow.value = user
+        }
+    }
+
     sealed class LoginResult {
         object Success : LoginResult()
         object InvalidCredentials : LoginResult()
     }
 
-    private val _loginResult = MutableStateFlow<LoginResult?>(null)
-    val loginResult: StateFlow<LoginResult?> = _loginResult
+
 
     fun login(email: String, password: String) {
         viewModelScope.launch {

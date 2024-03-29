@@ -20,7 +20,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="16dp"
-            android:background="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +27,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraint"
                 android:transitionName="image_small"
-                android:background="#D3102039"
+                android:background="#1F3351"
                 android:layout_width="match_parent"
                 android:layout_height="200dp">
 
@@ -71,9 +70,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="titil"
+
                 android:fontFamily="@font/audiowide"
-                android:textColor="@color/white"
+                android:background="#1F3351"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 

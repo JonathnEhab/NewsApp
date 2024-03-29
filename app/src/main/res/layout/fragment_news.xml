@@ -13,22 +13,58 @@
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:orientation="vertical">
 
-         <TextView
+          android:orientation="vertical">
+         <androidx.constraintlayout.widget.ConstraintLayout
              android:layout_width="match_parent"
-             android:layout_height="wrap_content"
              android:layout_marginTop="50dp"
-             android:fontFamily="@font/david_libre"
-             android:text="  Resources"
-             android:textColor="@color/white"
-             android:textSize="30dp" />
+             android:orientation="horizontal"
+
+             android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/david_libre"
+                android:text="  Resources"
+
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/user_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/outline_account_circle_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+         </androidx.constraintlayout.widget.ConstraintLayout>
+           <com.facebook.shimmer.ShimmerFrameLayout
+               android:id="@+id/source_shimmer"
+               android:layout_width="match_parent"
+               android:layout_height="210dp">
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="horizontal">
+                 <include layout="@layout/item_source_shimmer"/>
+                 <include layout="@layout/item_source_shimmer"/>
+                 <include layout="@layout/item_source_shimmer"/>
+              </LinearLayout>
+
+           </com.facebook.shimmer.ShimmerFrameLayout>
+
          <androidx.recyclerview.widget.RecyclerView
              android:id="@+id/source_recycler"
              android:layout_width="match_parent"
              android:layout_marginTop="5dp"
              android:layout_height="210dp"
-             android:visibility="visible"
+             android:visibility="gone"
              tools:listitem="@layout/item_source"
              app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
              android:orientation="horizontal"
@@ -44,11 +80,25 @@
              android:text="  News"
              android:textColor="@color/white"
              android:textSize="30dp" />
+         <com.facebook.shimmer.ShimmerFrameLayout
+             android:id="@+id/news_shimmer"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+               <include layout="@layout/item_news_shammer"/>
+               <include layout="@layout/item_news_shammer"/>
+               <include layout="@layout/item_news_shammer"/>
+            </LinearLayout>
+         </com.facebook.shimmer.ShimmerFrameLayout>
          <androidx.recyclerview.widget.RecyclerView
              android:id="@+id/vertical_news_Recycler"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:orientation="vertical"
+             android:visibility="gone"
              app:layout_constraintTop_toBottomOf="@+id/source_recycler"
              tools:listitem="@layout/item_news" />
 

@@ -28,7 +28,7 @@
             android:name=".presenter.ui.home.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".presenter.ui.register.RegisterActivity"
+            android:name=".presenter.ui.userAccount.RegisterActivity"
             android:exported="true">
 
         </activity>
